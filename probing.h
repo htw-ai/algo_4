@@ -3,9 +3,9 @@
 #ifndef PROBING_H_
 #define PROBING_H_
 
-int * hash_matrikel_numbers(int matrikelNumbers [], unsigned int length, unsigned int hashTableLength);
+int *hash_matrikel_numbers(int matrikelNumbers[], unsigned int length, unsigned int hashTableLength);
 
-struct HashEntry * build_hash_table(int valuesArray[], unsigned int m, unsigned int length);
+struct HashEntry *build_hash_table(int valuesArray[], unsigned int m, unsigned int length);
 
 int hash(int k, unsigned int j, unsigned int m, int method);
 

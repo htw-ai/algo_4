@@ -2,27 +2,26 @@
 #include <math.h>
 #include "probing.h"
 
-struct HashEntry
-{
+struct HashEntry {
     int key;
     int value;
     int hasValue;
 };
 
-int * hash_matrikel_numbers(int matrikelNumbers [], unsigned int length, unsigned int hashTableLength){
-    static unsigned int hashTable[] = { 0 };
+int *hash_matrikel_numbers(int matrikelNumbers[], unsigned int length, unsigned int hashTableLength) {
+    static unsigned int hashTable[] = {0};
     // clean up array
     for (int i = 0; i < hashTableLength; i++)
         hashTable[i] = -1;
 
     //int size = sizeof(matrikelNumbers);
 
-    for (int i = 0; i < length; i++){
+    for (int i = 0; i < length; i++) {
         int j = 0, matrikelNumber = matrikelNumbers[i];
 
         unsigned int key = hash(matrikelNumber, j++, hashTableLength, 0);
 
-        while (key != -1 && hashTable[key] != -1){
+        while (key != -1 && hashTable[key] != -1) {
             printf("\nCollision at table position %u", key);
             key = hash(matrikelNumber, j++, hashTableLength, 0);
         }
@@ -32,10 +31,10 @@ int * hash_matrikel_numbers(int matrikelNumbers [], unsigned int length, unsigne
 
 }
 
-struct HashEntry * build_hash_table(int values[], unsigned int m, unsigned int length){
-    static struct HashEntry hashTable[] = { { 0, 0, 0 } };
+struct HashEntry *build_hash_table(int values[], unsigned int m, unsigned int length) {
+    static struct HashEntry hashTable[] = {{0, 0, 0}};
 
-    for (int i = 0; i < length; i++){
+    for (int i = 0; i < length; i++) {
         struct HashEntry entry;
         int j = 0;
 
@@ -57,7 +56,7 @@ struct HashEntry * build_hash_table(int values[], unsigned int m, unsigned int l
     return hashTable;
 }
 
-int hash(int k, unsigned int j, unsigned int m, int method){
+int hash(int k, unsigned int j, unsigned int m, int method) {
     int probing = 0;
     if (method == 0)
         probing = linear_probing(j);
@@ -67,18 +66,18 @@ int hash(int k, unsigned int j, unsigned int m, int method){
     return (hash_division_rest(k, m) - probing) % m;
 }
 
-int hash_division_rest(int k, unsigned int m){
+int hash_division_rest(int k, unsigned int m) {
     return k % m;
 }
 
-int linear_probing(unsigned int j){
+int linear_probing(unsigned int j) {
     return j;
 }
 
-int quadratic_probing(unsigned int j){
+int quadratic_probing(unsigned int j) {
     return pow(round_div(j, 2), 2) * (-pow(1, j));
 }
 
-int round_div(unsigned int dividend, unsigned int divisor){
+int round_div(unsigned int dividend, unsigned int divisor) {
     return (dividend + (divisor / 2)) / divisor;
 }

@@ -2,7 +2,6 @@
 #include <string.h>
 #include "probing.h"
 #include "sort.h"
-#include "student.h"
 
 long unsigned int horner(char *key, unsigned int length) {
     char *characters = key;
@@ -20,10 +19,10 @@ long unsigned int horner(char *key, unsigned int length) {
     return h;
 }
 
-void reinitList(void * destination, void * source, size_t size, int length) {
-    printf("\n\nreinitialize list\n");
+void reinitList(void *destination, void *source, size_t size, int length) {
+    //printf("\nreinitialize list: ");
     memcpy(destination, source, size);
-    printList(destination, length);
+    //printList(destination, length);
 }
 
 int main() {
@@ -55,10 +54,10 @@ int main() {
             {3, "Reinhold", "Portner"}
     };
 //    int listTemplate[6] = {5, 2, 4, 6, 1, 3};
-    int size = sizeof(listTemplate) / sizeof * listTemplate;
+    int size = sizeof(listTemplate) / sizeof *listTemplate;
     struct student list[size];
 
-    printf("\ninititialize list\n");
+    printf("\n\ninititialize list to: ");
     memcpy(list, listTemplate, sizeof listTemplate);
     printList(list, size);
 
@@ -67,14 +66,14 @@ int main() {
     reinitList(list, listTemplate, sizeof listTemplate, size);
     bubble_sort(list, size);
 
+    printf("\nquick sort:\n");
     reinitList(list, listTemplate, sizeof listTemplate, size);
     quick_sort(list, 0, size - 1);
-    printf("\nresult of quick sort is:\n");
+
     printList(list, size);
 
     reinitList(list, listTemplate, sizeof listTemplate, size);
     select_sort(list, size);
-
 
 
     return 0;

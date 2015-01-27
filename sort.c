@@ -1,11 +1,9 @@
 #include <string.h>
 #include "stdio.h"
 #include "sort.h"
-#include "student.h"
 
-
-//quick sort function to sort Integer array list
-void quick_sort(struct student array [], unsigned int firstIndex, unsigned int lastIndex) {
+//quick sort function to sort studen array list
+void quick_sort(struct student students[], int firstIndex, int lastIndex) {
     struct student temp;
     int pivotIndex, index1, index2;
 
@@ -17,32 +15,32 @@ void quick_sort(struct student array [], unsigned int firstIndex, unsigned int l
 
         //Sorting in Ascending order with quick sort
         while (index1 < index2) {
-            while (array[index1].matrikelnumber <= array[pivotIndex].matrikelnumber && index1 < lastIndex)
+            while (students[index1].matrikelnumber <= students[pivotIndex].matrikelnumber && index1 < lastIndex)
                 index1++;
-            while (array[index2].matrikelnumber > array[pivotIndex].matrikelnumber)
+            while (students[index2].matrikelnumber > students[pivotIndex].matrikelnumber)
                 index2--;
 
             if (index1 < index2) {
                 //Swapping
-                temp = array[index1];
-                array[index1] = array[index2];
-                array[index2] = temp;
+                temp = students[index1];
+                students[index1] = students[index2];
+                students[index2] = temp;
             }
         }
 
         //At the end of first iteration, swap pivot element with index2 element
-        temp = array[pivotIndex];
-        array[pivotIndex] = array[index2];
-        array[index2] = temp;
+        temp = students[pivotIndex];
+        students[pivotIndex] = students[index2];
+        students[index2] = temp;
 
         //Recursive call for quick sort, with partiontioning
-        quick_sort(array, firstIndex, index2 - 1);
-        quick_sort(array, index2 + 1, lastIndex);
+        quick_sort(students, firstIndex, index2 - 1);
+        quick_sort(students, index2 + 1, lastIndex);
     }
 }
 
-//select sort function to sort Integer array list
-void select_sort(struct student list [], unsigned int size) {
+//select sort function to sort student array list
+void select_sort(struct student list[], unsigned int size) {
     struct student tmp;
     int position;
     for (int i = 0; i < (size - 1); i++) {
@@ -59,12 +57,12 @@ void select_sort(struct student list [], unsigned int size) {
         }
     }
 
-    printf("\nresult of select sort is:\n");
+    printf("\nselect sort:\n");
     printList(list, size);
 }
 
-//buble sort function to sort Integer array list
-void bubble_sort(struct student list [], unsigned int size) {
+//buble sort function to sort student array list
+void bubble_sort(struct student list[], unsigned int size) {
     struct student tmp;
     int sizeOutput = size;
     for (int n = size; size > 1; size--) {
@@ -76,12 +74,12 @@ void bubble_sort(struct student list [], unsigned int size) {
             }
         }
     }
-    printf("\nresult of bubble sort is:\n");
+    printf("\nbubble sort:\n");
     printList(list, sizeOutput);
 }
 
-//insert sort function to sort Integer array list
-void insert_sort(struct student list [], unsigned int size) {
+//insert sort function to sort student array list
+void insert_sort(struct student list[], unsigned int size) {
     int currentValue;
     struct student comparer;
     for (int i = 1; i <= size - 1; i++) {
@@ -96,12 +94,12 @@ void insert_sort(struct student list [], unsigned int size) {
         }
     }
 
-    printf("\nresult of insert sort is:\n");
+    printf("\ninsert sort:\n");
     printList(list, size);
 }
 
-//console output of a list
-void printList(struct student list[], unsigned int length) {
+//console output for a student array
+void printList(struct student students[], unsigned int length) {
     for (int i = 0; i < length; i++)
-        printf("%s, ", list[i].firstName);
+        printf("%s, ", students[i].firstName);
 }
