@@ -1,14 +1,15 @@
-//#parse("C File Header.h")
 
 #ifndef SORT_H_
 #define SORT_H_
 
-void quick_sort( int list[], int size, int pivotIndex);
-int divide_into_partitions(int list[], unsigned int size, unsigned int pivotIndex);
+#include "student.h"
 
-void bubble_sort(int list[], unsigned int size);
-void select_sort(int list[], unsigned int size);
-void heap_sort(int list[], unsigned int size);
-void insert_sort(int list[], unsigned int length);
+void quick_sort(struct student list[], unsigned int firstIndex, unsigned int lastIndex);
+void bubble_sort(struct student list[], unsigned int size);
+void select_sort(struct student list[], unsigned int size);
+//void heap_sort(struct student list[], unsigned int size);
+void insert_sort(struct student list[], unsigned int size);
+
+void printList(struct student list[], unsigned int length);
 
 #endif // SORT_H_
