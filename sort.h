@@ -2,7 +2,7 @@
 #define SORT_H_
 
 struct student {
-    int matrikelnumber;
+    int matrikelNumber;
     char *name;
     char *firstName;
 };

@@ -3,6 +3,12 @@
 #ifndef PROBING_H_
 #define PROBING_H_
 
+struct HashEntry {
+    int key;
+    int value;
+    int hasValue;
+};
+
 int *hash_matrikel_numbers(int matrikelNumbers[], unsigned int length, unsigned int hashTableLength);
 
 struct HashEntry *build_hash_table(int valuesArray[], unsigned int m, unsigned int length);

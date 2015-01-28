@@ -2,12 +2,6 @@
 #include <math.h>
 #include "probing.h"
 
-struct HashEntry {
-    int key;
-    int value;
-    int hasValue;
-};
-
 int *hash_matrikel_numbers(int matrikelNumbers[], unsigned int length, unsigned int hashTableLength) {
     static unsigned int hashTable[] = {0};
     // clean up array

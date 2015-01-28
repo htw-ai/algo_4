@@ -2,7 +2,9 @@
 #include <string.h>
 #include "probing.h"
 #include "sort.h"
+#include <time.h>
 
+//converting a string into a number by the horner schema
 long unsigned int horner(char *key, unsigned int length) {
     char *characters = key;
 
@@ -25,12 +27,18 @@ void reinitList(void *destination, void *source, size_t size, int length) {
     //printList(destination, length);
 }
 
+//console output for a student array
+void printList(struct student students[], unsigned int length) {
+    for (int i = 0; i < length; i++)
+        printf("%s, ", students[i].firstName);
+}
+
 int main() {
     // 1.)
     char *b = "AKEY";
     int length = sizeof(b);
     long unsigned int h = horner(b, length);
-    printf("h: %lu\n", h);
+    printf("horner: %lu\n", h);
 
     // 2.)
     int values[5] = {12, 2, 27, 7, 14};
@@ -40,40 +48,56 @@ int main() {
     printf("m = 7");
     struct HashEntry *entries = build_hash_table(values, m, 5);
 
-    unsigned int matrikelNumbers[4] = {123456, 7654321, 321686, 4};
+    unsigned int matrikelNumbers[4] = {12, 2, 27, 7, 14};
     hash_matrikel_numbers(matrikelNumbers, 4, 7);
-
+    for (int i = 0; i < 7; i++){
+        printf("\n|%d| --> %d", i, entries[i].key);
+    }
 
     // 3.)
-    struct student listTemplate[] = {
+    int size = 50000;
+    printf("\n\ninititialize students...");
+    struct student listTemplateTemplate[] = {
             {5, "Klaus", "Schmidt"},
+            {13, "Robert", "Faustal"},
             {2, "Falk", "Stenger"},
             {4, "Simon", "Becher"},
+            {14, "Johanna", "Frustmacher"},
             {6, "Alexandra", "Brose"},
             {1, "Willy", "Simen"},
-            {3, "Reinhold", "Portner"}
-    };
-//    int listTemplate[6] = {5, 2, 4, 6, 1, 3};
-    int size = sizeof(listTemplate) / sizeof *listTemplate;
-    struct student list[size];
+            {11, "Mark", "Martin"},
+            {3, "Reinhold", "Portner"},
+            {7, "Sven", "Meyer"},
+            {8, "Katharina", "Faustfurt"},
+            {10, "Bettina", "Schmidt"},
+            {12, "Janina", "Stern"},
+            {9, "Karl", "Schiffer"}};
 
-    printf("\n\ninititialize list to: ");
-    memcpy(list, listTemplate, sizeof listTemplate);
-    printList(list, size);
+    struct student listTemplate[size];
+    for (int i = 0; i < size; i++)
+        listTemplate[i] = listTemplateTemplate[i % 15];
 
-    insert_sort(list, size);
+    struct student students[size];
+    memcpy(students, listTemplate, sizeof listTemplate);
 
-    reinitList(list, listTemplate, sizeof listTemplate, size);
-    bubble_sort(list, size);
+    clock_t start = clock();
+    insert_sort(students, size);
+    printf("\ninsert sort took %d milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
 
-    printf("\nquick sort:\n");
-    reinitList(list, listTemplate, sizeof listTemplate, size);
-    quick_sort(list, 0, size - 1);
+    reinitList(students, listTemplate, sizeof listTemplate, size);
+    start = clock();
+    bubble_sort(students, size);
+    printf("\nbubble sort took %d milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
 
-    printList(list, size);
+    reinitList(students, listTemplate, sizeof listTemplate, size);
+    start = clock();
+    quick_sort(students, 0, size - 1);
+    printf("\nquick sort took %d milliseconds\n", (clock() - start) * 1000 / CLOCKS_PER_SEC);
 
-    reinitList(list, listTemplate, sizeof listTemplate, size);
-    select_sort(list, size);
+    reinitList(students, listTemplate, sizeof listTemplate, size);
+    start = clock();
+    select_sort(students, size);
+    printf("\nselect sort took %d milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
 
 
     return 0;
