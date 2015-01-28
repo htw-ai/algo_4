@@ -66,8 +66,8 @@ void select_sort(struct student list[], unsigned int size) {
 //buble sort function to sort student array list by matrikelNumber
 void bubble_sort(struct student list[], unsigned int size) {
     struct student tmp;
-    int sizeOutput = size;
-    for (int n = size; size > 1; size--) {
+    //int sizeOutput = size;
+    for (; size > 1; size--) {
         for (int i = 0; i < size - 1; i++) {
             if (list[i].matrikelNumber > list[i + 1].matrikelNumber) {
                 tmp = list[i];

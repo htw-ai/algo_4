@@ -48,7 +48,7 @@ int main() {
     printf("m = 7");
     struct HashEntry *entries = build_hash_table(values, m, 5);
 
-    unsigned int matrikelNumbers[4] = {12, 2, 27, 7, 14};
+    unsigned int matrikelNumbers[] = {12, 2, 27, 7, 14};
     hash_matrikel_numbers(matrikelNumbers, 4, 7);
     for (int i = 0; i < 7; i++){
         printf("\n|%d| --> %d", i, entries[i].key);
@@ -56,7 +56,7 @@ int main() {
 
     // 3.)
     int size = 50000;
-    printf("\n\ninititialize students...");
+    printf("\n\ninititialize %i students...", size);
     struct student listTemplateTemplate[] = {
             {5, "Klaus", "Schmidt"},
             {13, "Robert", "Faustal"},
@@ -82,22 +82,22 @@ int main() {
 
     clock_t start = clock();
     insert_sort(students, size);
-    printf("\ninsert sort took %d milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
+    printf("\ninsert sort took %lu milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
 
     reinitList(students, listTemplate, sizeof listTemplate, size);
     start = clock();
     bubble_sort(students, size);
-    printf("\nbubble sort took %d milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
+    printf("\nbubble sort took %lu milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
 
     reinitList(students, listTemplate, sizeof listTemplate, size);
     start = clock();
     quick_sort(students, 0, size - 1);
-    printf("\nquick sort took %d milliseconds\n", (clock() - start) * 1000 / CLOCKS_PER_SEC);
+    printf("\nquick sort took %lu milliseconds\n", (clock() - start) * 1000 / CLOCKS_PER_SEC);
 
     reinitList(students, listTemplate, sizeof listTemplate, size);
     start = clock();
     select_sort(students, size);
-    printf("\nselect sort took %d milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
+    printf("\nselect sort took %lu milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
 
 
     return 0;

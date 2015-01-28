@@ -2,13 +2,11 @@
 #include <math.h>
 #include "probing.h"
 
-int *hash_matrikel_numbers(int matrikelNumbers[], unsigned int length, unsigned int hashTableLength) {
+void hash_matrikel_numbers(unsigned int matrikelNumbers[], unsigned int length, unsigned int hashTableLength) {
     static unsigned int hashTable[] = {0};
     // clean up array
     for (int i = 0; i < hashTableLength; i++)
         hashTable[i] = -1;
-
-    //int size = sizeof(matrikelNumbers);
 
     for (int i = 0; i < length; i++) {
         int j = 0, matrikelNumber = matrikelNumbers[i];
@@ -27,21 +25,14 @@ int *hash_matrikel_numbers(int matrikelNumbers[], unsigned int length, unsigned 
 
 struct HashEntry *build_hash_table(int values[], unsigned int m, unsigned int length) {
     static struct HashEntry hashTable[] = {{0, 0, 0}};
+    int key = 0;
 
     for (int i = 0; i < length; i++) {
         struct HashEntry entry;
-        int j = 0;
 
-        entry.key = -1;
         entry.value = values[i];
         entry.hasValue = 0;
-
-        int key = hash(entry.value, j++, m, 1);
-        // test for collision
-        while (hashTable[key].hasValue == 1)
-            key = hash(entry.value, j++, m, 1);
-
-        entry.key = key;
+        entry.key = insertValue(hashTable, values[i], m);
         entry.hasValue = 1;
 
         hashTable[key] = entry;
@@ -50,11 +41,20 @@ struct HashEntry *build_hash_table(int values[], unsigned int m, unsigned int le
     return hashTable;
 }
 
+int insertValue(struct HashEntry hashTable[], int value, int m){
+    int key, j = 0;
+
+    do
+        key = hash(value, j++, m, 0);
+    while(hashTable[key].hasValue != 1);
+    return key;
+}
+
 int hash(int k, unsigned int j, unsigned int m, int method) {
     int probing = 0;
-    if (method == 0)
+    if (0 == method)
         probing = linear_probing(j);
-    else if (method = 1)
+    else if (1 == method)
         probing = quadratic_probing(j);
 
     return (hash_division_rest(k, m) - probing) % m;
