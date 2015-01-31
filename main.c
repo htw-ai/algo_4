@@ -116,7 +116,7 @@ int main() {
     // 3.)
     sorting();
 
-    printf("\n\npress any key to exit...\n");
+    printf("\n\npress enter to exit...\n");
     getchar();
 
     return 0;
