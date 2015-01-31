@@ -1,25 +1,9 @@
 #include <stdio.h>
 #include <string.h>
-#include "probing.h"
 #include "sort.h"
+#include "hash.h"
 #include <time.h>
 
-//converting a string into a number by the horner schema
-long unsigned int horner(char *key, unsigned int length) {
-    char *characters = key;
-
-    int c = *characters++;
-    c -= (int) ('A');
-    c++;
-    long unsigned int h = c;
-
-    for (int i = 1; i < length; i++) {
-        c = *characters++;
-        c -= (int) 'A';
-        h = (h * 32) + (c + 1);
-    }
-    return h;
-}
 
 //reinitialize a list by copying the content from an existing list
 void reinitList(void *destination, void *source, size_t size, int length) {
@@ -39,25 +23,25 @@ int main() {
     char * b = "AKEY";
     int length = 4;
     long unsigned int h = horner(b, length);
-    printf("horner: %lu\n", h);
+    printf("horner (\'%s\'): %lu\n", b, h);
 
     // 2.)
     int values[5] = {12, 2, 27, 7, 14};
     int m = 7;
     printf("\n\nStoring value set in hash table...");
-    printf("values = {12, 2, 27, 7, 14}");
-    printf("m = 7");
+    printf("\nvalues = {12, 2, 27, 7, 14}");
+    printf("\nm = 7\n");
     struct HashEntry *entries = build_hash_table(values, m, 5);
 
     unsigned int matrikelNumbers[] = {12, 2, 27, 7, 14};
     hash_matrikel_numbers(matrikelNumbers, 4, 7);
-    for (int i = 0; i < m; i++){
-        printf("\n|%d| --> %d", i, entries[i].key);
-    }
+    for (int i = 0; i < m; i++)
+        printf("\n|%d| --> %d", i, entries[i].value);
+
 
     // 3.)
-    int size = 50;
-    printf("\n\ninititialize %i students...", size);
+    int size = 10000;
+    printf("\n\nSort of %i students...\n", size);
     struct student listTemplateTemplate[15] = {
             {5, "Klaus", "Schmidt"},
             {13, "Robert", "Faustal"},
