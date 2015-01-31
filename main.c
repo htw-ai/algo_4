@@ -18,30 +18,49 @@ void printList(struct student students[], unsigned int length) {
         printf("%s, ", students[i].firstName);
 }
 
-int main() {
-    // 1.)
+//implementation of exercise one
+void hashing(){
+    printf("1.) hashing:\n");
+    printf("------------\n");
+
     char * b = "AKEY";
     int length = 4;
     long unsigned int h = horner(b, length);
-    printf("horner (\'%s\'): %lu\n", b, h);
+    printf("creating integer value of text by horner schema... \n\'%s\' --> %lu\n", b, h);
 
-    // 2.)
+    int value = 15376, modulo = 7;
+    printf("\ncreating hash value of integer value by division rest method (modulo operator: %i)... \n", modulo);
+    int hash = hash_division_rest(value, modulo);
+    printf("%i --> %i\n", value, hash);
+}
+
+void probing(){
+    printf("\n2.) probing:\n");
+    printf("------------\n");
+
     int values[5] = {12, 2, 27, 7, 14};
     int m = 7;
-    printf("\n\nStoring value set in hash table...");
+    printf("Storing value set in hash table...");
     printf("\nvalues = {12, 2, 27, 7, 14}");
     printf("\nm = 7\n");
     struct HashEntry *entries = build_hash_table(values, m, 5);
 
     unsigned int matrikelNumbers[] = {12, 2, 27, 7, 14};
     hash_matrikel_numbers(matrikelNumbers, 4, 7);
+    printf("\n\nhash table result:");
     for (int i = 0; i < m; i++)
         printf("\n|%d| --> %d", i, entries[i].value);
+    printf("\n");
+}
 
+// analyses different sorting algorithms. Therefore initializes a vast amount of students
+// and checks how much time each algorithm takes. Also displays the result on the console.
+void sorting(){
+    printf("\n3.) sorting:\n");
+    printf("------------\n");
 
-    // 3.)
     int size = 10000;
-    printf("\n\nSort of %i students...\n", size);
+    printf("Sorting %i students...\n", size);
     struct student listTemplateTemplate[15] = {
             {5, "Klaus", "Schmidt"},
             {13, "Robert", "Faustal"},
@@ -63,27 +82,45 @@ int main() {
         listTemplate[i] = listTemplateTemplate[i % 15];
 
     struct student students[size];
-    memcpy(students, listTemplate, sizeof listTemplate);
 
-    clock_t start = clock();
+
+    //reinitializing the students list by copying the content from the existing list template
+    memcpy(students, listTemplate, sizeof listTemplate);
+    //memorize the current time
+    clock_t start = clock(), end;
     insert_sort(students, size);
-    printf("\ninsert sort took %lu milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
+    end = clock() - start;
+    printf("\ninsert sort took %lu milliseconds", end);
 
     memcpy(students, listTemplate, sizeof listTemplate);
     start = clock();
     bubble_sort(students, size);
-    printf("\nbubble sort took %lu milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
+    end = clock() - start;
+    printf("\nbubble sort took %lu milliseconds", end);
 
     memcpy(students, listTemplate, sizeof listTemplate);
     start = clock();
     quick_sort(students, 0, size - 1);
-    printf("\nquick sort took %lu milliseconds\n", (clock() - start) * 1000 / CLOCKS_PER_SEC);
+    end = clock() - start;
+    printf("\nquick sort took %lu milliseconds", end);
 
     memcpy(students, listTemplate, sizeof listTemplate);
-   start = clock();
+    start = clock();
     select_sort(students, size);
-    printf("\nselect sort took %lu milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
+    end = clock() - start;
+    printf("\nselect sort took %lu milliseconds", end);
+}
 
+int main() {
+    // 1.)
+    hashing();
+    // 2.)
+    probing();
+    // 3.)
+    sorting();
+
+    printf("\n\npress any key to exit...\n");
+    getchar();
 
     return 0;
 }

@@ -1,5 +1,3 @@
-#include <string.h>
-#include "stdio.h"
 #include "sort.h"
 
 //quick sort function to sort student array list by matrikelNumber
@@ -60,7 +58,7 @@ void select_sort(struct student list[], unsigned int size) {
     }
 }
 
-//buble sort function to sort student array list by matrikelNumber
+//bubble sort function to sort student array list by matrikelNumber
 void bubble_sort(struct student list[], unsigned int size) {
     struct student tmp;
     //int sizeOutput = size;
