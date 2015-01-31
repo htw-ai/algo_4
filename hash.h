@@ -9,9 +9,9 @@ struct HashEntry {
     int hasValue;
 };
 
-struct HashEntry *build_hash_table(int valuesArray[], unsigned int m, unsigned int length);
+struct HashEntry *build_hash_table(int valuesArray[], unsigned int m, unsigned int length, int method);
 
-int getKey(struct HashEntry hashTable[], int value, int m);
+int getKey(struct HashEntry hashTable[], int value, int m, int method);
 
 int hash(int k, unsigned int j, unsigned int m, int method);
 

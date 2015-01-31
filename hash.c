@@ -5,7 +5,7 @@
 #include "probing.h"
 
 //builds a hash table of size m, from an array of integer values
-struct HashEntry *build_hash_table(int values[], unsigned int m, unsigned int length) {
+struct HashEntry *build_hash_table(int values[], unsigned int m, unsigned int length, int method) {
 
     struct HashEntry *hashTable = (struct HashEntry*)malloc(sizeof(struct HashEntry)*m);
 
@@ -14,7 +14,7 @@ struct HashEntry *build_hash_table(int values[], unsigned int m, unsigned int le
 
         entry.value = values[i];
         entry.hasValue = 0;
-        entry.key = getKey(hashTable, values[i], m);
+        entry.key = getKey(hashTable, values[i], m, method);
         entry.hasValue = 1;
 
         hashTable[entry.key] = entry;
@@ -24,11 +24,11 @@ struct HashEntry *build_hash_table(int values[], unsigned int m, unsigned int le
 }
 
 //returning the key for inserting a new value into a hash table
-int getKey(struct HashEntry hashTable[], int value, int m) {
+int getKey(struct HashEntry hashTable[], int value, int m, int method) {
     int key, j = 0, counter = 0;
 
     do {
-        key = hash(value, j++, m, 0);
+        key = hash(value, j++, m, method);
         counter++;
     } while(hashTable[key].hasValue == 1 && counter < m);
 

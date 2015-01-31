@@ -42,11 +42,15 @@ void probing(){
     int m = 7;
     printf("Storing value set in hash table...");
     printf("\nvalues = {12, 2, 27, 7, 14}");
-    printf("\nm = 7\n");
-    struct HashEntry *entries = build_hash_table(values, m, 5);
-    printf("\n\nhash table result:");
+    printf("\nhash table length = %i\n", m);
+    struct HashEntry *entriesLinear = build_hash_table(values, m, 5, 0);
+    struct HashEntry *entriesQuadric = build_hash_table(values, m, 5, 1);
+    printf("\nhash table with linear probing:");
     for (int i = 0; i < m; i++)
-        printf("\n|%d| --> %d", i, entries[i].value);
+        printf("\n|%d| --> %d", i, entriesLinear[i].value);
+    printf("\n\nhash table with quadratic probing:");
+    for (int i = 0; i < m; i++)
+        printf("\n|%d| --> %d", i, entriesQuadric[i].value);
     printf("\n");
 }
 
