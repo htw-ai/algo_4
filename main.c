@@ -44,9 +44,6 @@ void probing(){
     printf("\nvalues = {12, 2, 27, 7, 14}");
     printf("\nm = 7\n");
     struct HashEntry *entries = build_hash_table(values, m, 5);
-
-    unsigned int matrikelNumbers[] = {12, 2, 27, 7, 14};
-    hash_matrikel_numbers(matrikelNumbers, 4, 7);
     printf("\n\nhash table result:");
     for (int i = 0; i < m; i++)
         printf("\n|%d| --> %d", i, entries[i].value);

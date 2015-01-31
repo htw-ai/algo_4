@@ -9,11 +9,9 @@ struct HashEntry {
     int hasValue;
 };
 
-void hash_matrikel_numbers(unsigned int matrikelNumbers[], unsigned int length, unsigned int hashTableLength);
-
 struct HashEntry *build_hash_table(int valuesArray[], unsigned int m, unsigned int length);
 
-int insertValue(struct HashEntry hashTable[], int value, int m);
+int getKey(struct HashEntry hashTable[], int value, int m);
 
 int hash(int k, unsigned int j, unsigned int m, int method);
 
