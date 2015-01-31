@@ -33,8 +33,8 @@ void quick_sort(struct student students[], int firstIndex, int lastIndex) {
         students[pivotIndex] = students[index2];
         students[index2] = temp;
 
-        // recursive call for quick sort, with partiontioning
-        //
+        // divide and conquer...
+        // recursive call of quick sort, with partitioning
         quick_sort(students, firstIndex, index2 - 1);
         quick_sort(students, index2 + 1, lastIndex);
     }
@@ -58,9 +58,6 @@ void select_sort(struct student list[], unsigned int size) {
             list[position] = tmp;
         }
     }
-
-//    printf("\nselect sort:\n");
-//    printList(list, size);
 }
 
 //buble sort function to sort student array list by matrikelNumber
@@ -70,14 +67,13 @@ void bubble_sort(struct student list[], unsigned int size) {
     for (; size > 1; size--) {
         for (int i = 0; i < size - 1; i++) {
             if (list[i].matrikelNumber > list[i + 1].matrikelNumber) {
+                // swapping
                 tmp = list[i];
                 list[i] = list[i + 1];
                 list[i + 1] = tmp;
             }
         }
     }
-//    printf("\nbubble sort:\n");
-//    printList(list, sizeOutput);
 }
 
 //insert sort function to sort student array list by matrikelNumber
@@ -88,6 +84,7 @@ void insert_sort(struct student list[], unsigned int size) {
         currentValue = i;
 
         while (currentValue > 0 && list[currentValue].matrikelNumber < list[currentValue - 1].matrikelNumber) {
+            // swapping
             comparer = list[currentValue];
             list[currentValue] = list[currentValue - 1];
             list[currentValue - 1] = comparer;
@@ -95,6 +92,5 @@ void insert_sort(struct student list[], unsigned int size) {
             currentValue--;
         }
     }
-
 }
 

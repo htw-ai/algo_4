@@ -15,6 +15,4 @@ void select_sort(struct student list[], unsigned int size);
 
 void insert_sort(struct student list[], unsigned int size);
 
-void printList(struct student students[], unsigned int length);
-
 #endif // SORT_H_

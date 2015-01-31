@@ -21,6 +21,7 @@ long unsigned int horner(char *key, unsigned int length) {
     return h;
 }
 
+//reinitialize a list by copying the content from an existing list
 void reinitList(void *destination, void *source, size_t size, int length) {
     //printf("\nreinitialize list: ");
     memcpy(destination, source, size);
@@ -35,8 +36,8 @@ void printList(struct student students[], unsigned int length) {
 
 int main() {
     // 1.)
-    char *b = "AKEY";
-    int length = sizeof(b);
+    char * b = "AKEY";
+    int length = 4;
     long unsigned int h = horner(b, length);
     printf("horner: %lu\n", h);
 
@@ -50,14 +51,14 @@ int main() {
 
     unsigned int matrikelNumbers[] = {12, 2, 27, 7, 14};
     hash_matrikel_numbers(matrikelNumbers, 4, 7);
-    for (int i = 0; i < 7; i++){
+    for (int i = 0; i < m; i++){
         printf("\n|%d| --> %d", i, entries[i].key);
     }
 
     // 3.)
-    int size = 50000;
+    int size = 50;
     printf("\n\ninititialize %i students...", size);
-    struct student listTemplateTemplate[] = {
+    struct student listTemplateTemplate[15] = {
             {5, "Klaus", "Schmidt"},
             {13, "Robert", "Faustal"},
             {2, "Falk", "Stenger"},
@@ -84,18 +85,18 @@ int main() {
     insert_sort(students, size);
     printf("\ninsert sort took %lu milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
 
-    reinitList(students, listTemplate, sizeof listTemplate, size);
+    memcpy(students, listTemplate, sizeof listTemplate);
     start = clock();
     bubble_sort(students, size);
     printf("\nbubble sort took %lu milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
 
-    reinitList(students, listTemplate, sizeof listTemplate, size);
+    memcpy(students, listTemplate, sizeof listTemplate);
     start = clock();
     quick_sort(students, 0, size - 1);
     printf("\nquick sort took %lu milliseconds\n", (clock() - start) * 1000 / CLOCKS_PER_SEC);
 
-    reinitList(students, listTemplate, sizeof listTemplate, size);
-    start = clock();
+    memcpy(students, listTemplate, sizeof listTemplate);
+   start = clock();
     select_sort(students, size);
     printf("\nselect sort took %lu milliseconds\n", clock() - start * 1000 / CLOCKS_PER_SEC);
 

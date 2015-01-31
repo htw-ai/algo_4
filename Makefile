@@ -1,7 +1,7 @@
 CC=gcc
 SOURCE=*.c
 OPTIONS=-g -lm --std=c99 -Wall
-DESTINATION=main
+DESTINATION=main.out
 
 
 all: $(SOURCE)
@@ -10,6 +10,5 @@ all: $(SOURCE)
 run:
 	./$(DESTINATION)
 
-
-
-
+clean:
+	rm -f ./$(DESTINATION)

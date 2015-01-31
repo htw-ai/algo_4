@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 #include "probing.h"
 
 void hash_matrikel_numbers(unsigned int matrikelNumbers[], unsigned int length, unsigned int hashTableLength) {
@@ -24,7 +25,10 @@ void hash_matrikel_numbers(unsigned int matrikelNumbers[], unsigned int length, 
 }
 
 struct HashEntry *build_hash_table(int values[], unsigned int m, unsigned int length) {
-    static struct HashEntry hashTable[] = {{0, 0, 0}};
+
+    struct HashEntry *hashTable = (struct HashEntry*)malloc(sizeof(struct HashEntry)*m);
+//    hashEntry[0].hasValue
+//    struct HashEntry hashTable[m];
     int key = 0;
 
     for (int i = 0; i < length; i++) {
@@ -35,18 +39,19 @@ struct HashEntry *build_hash_table(int values[], unsigned int m, unsigned int le
         entry.key = insertValue(hashTable, values[i], m);
         entry.hasValue = 1;
 
-        hashTable[key] = entry;
+        hashTable[entry.key] = entry;
     }
 
     return hashTable;
 }
 
 int insertValue(struct HashEntry hashTable[], int value, int m){
-    int key, j = 0;
+    int key, j = 0, counter = 0;
 
     do
         key = hash(value, j++, m, 0);
-    while(hashTable[key].hasValue != 1);
+    while(counter++ < m || hashTable[key].hasValue != 1 );
+
     return key;
 }
 
