@@ -3,14 +3,7 @@
 #include "sort.h"
 #include "hash.h"
 #include <time.h>
-
-
-//reinitialize a list by copying the content from an existing list
-void reinitList(void *destination, void *source, size_t size, int length) {
-    //printf("\nreinitialize list: ");
-    memcpy(destination, source, size);
-    //printList(destination, length);
-}
+#include <stdlib.h>
 
 //console output for a student array
 void printList(struct student students[], unsigned int length) {
@@ -18,7 +11,7 @@ void printList(struct student students[], unsigned int length) {
         printf("%s, ", students[i].firstName);
 }
 
-//implementation of exercise one
+// creates hashes from integer and test values and finally displays them on the console.
 void hashing(){
     printf("1.) hashing:\n");
     printf("------------\n");
@@ -34,6 +27,8 @@ void hashing(){
     printf("%i --> %i\n", value, hash);
 }
 
+// creates two hash tables from a set of integer values, using different probing methods 
+// (linear and quadratic probing). Also displays the result on the console. 
 void probing(){
     printf("\n2.) probing:\n");
     printf("------------\n");
@@ -52,6 +47,8 @@ void probing(){
     for (int i = 0; i < m; i++)
         printf("\n|%d| --> %d", i, entriesQuadric[i].value);
     printf("\n");
+    free(entriesLinear);
+    free(entriesQuadric);
 }
 
 // analyses different sorting algorithms. Therefore initializes a vast amount of students
@@ -110,6 +107,10 @@ void sorting(){
     select_sort(students, size);
     end = clock() - start;
     printf("\nselect sort took %lu milliseconds", end);
+}
+
+void callSortFunction(void * func, char * algorithmName, void * data){
+	//...
 }
 
 int main() {

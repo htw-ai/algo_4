@@ -25,7 +25,7 @@ struct HashEntry *build_hash_table(int values[], unsigned int m, unsigned int le
 
 //returning the key for inserting a new value into a hash table
 int getKey(struct HashEntry hashTable[], int value, int m, int method) {
-    int key, j = 0, counter = 0;
+    int key = 0, j = 0, counter = 0;
 
     do {
         key = hash(value, j++, m, method);
